@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from "./components/styled/Container.styled";
+import Header from "./components/Header";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./components/styled/GlobalStyle";
+import { saveAs } from "file-saver";
+
+const theme = {
+  colors: {
+    header: "red",
+    text: "blue",
+  },
+};
 
 function App() {
+  const downloadImage = () => {
+    console.log("entered download space");
+    saveAs(
+      "https://imgd.aeplcdn.com/1200x900/cw/ec/37067/BMW-3-Series-Exterior-167583.jpg?wm=0&q=85",
+      "image.jpg"
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyle />
+        <Header></Header>
+        <Container>
+          <h1>Hello World</h1>
+        </Container>
+        <button onClick={downloadImage}>Download</button>
+      </>
+    </ThemeProvider>
   );
 }
 
